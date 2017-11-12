@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+
+android:background="#00CC00"
+    tools:context="kmitl.project.bosstanayot.runranrun.SplashCount"
+    >
+    <!--<pl.droidsonroids.gif.GifImageView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:src="@drawable/number"
+       android:background="#000000"
+       />-->
+   <TextView
+       android:id="@+id/num"
+       android:layout_width="150dp"
+       android:layout_height="300dp"
+       android:layout_centerHorizontal="true"
+       android:gravity="center"
+       android:layout_centerInParent="true"
+       android:text="3"
+       android:textSize="150dp"
+       android:textColor="#ffffff"/>
+
+</RelativeLayout>

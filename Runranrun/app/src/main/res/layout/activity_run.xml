@@ -111,5 +111,30 @@
             android:visibility="gone"
             android:text="Cancel" />
     </LinearLayout>
+    <RelativeLayout
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:gravity="center"
+        android:layout_marginTop="250dp">
+        <TextView
+            android:id="@+id/spm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SPM"
+            android:layout_centerHorizontal="true"
+            android:textSize="30dp"
+            />
+        <TextView
+            android:id="@+id/kmperhour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="0"
+            android:layout_marginTop="50dp"
+            android:textSize="30dp"
+
+
+            />
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -20,10 +20,12 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
     int first_check;
     TextView step_num;
     TextView dis_num;
+    TextView kmperhour;
     int count_step;
     Button start;
     Button cancel;
     TextView timenum;
+    int first_step;
     Handler handler = null;
     int seconds = 0;
 
@@ -34,13 +36,15 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
-        mSensorManager.registerListener(this,mSensor,SensorManager.SENSOR_DELAY_FASTEST);
+        mSensorManager.registerListener(this,mSensor,SensorManager.SENSOR_DELAY_UI);
         count_step = 0;
+        first_step = 0;
         step_num = findViewById(R.id.stepnum);
         dis_num = findViewById(R.id.disnum);
         start = (Button) findViewById(R.id.pausebutton);
         cancel = findViewById(R.id.cancel);
         timenum = findViewById(R.id.timenum);
+        kmperhour = findViewById(R.id.kmperhour);
         handler = new Handler();
         runTimer();
 
@@ -53,12 +57,17 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
                 int hours = seconds/3600;
                 int minutes = (seconds%3600)/60;
                 int secs = seconds%60;
-                String time = String.format("%02d:%02d:%02d",hours,minutes,secs);
-                timenum.setText(String.valueOf(time));
                 if(running){
+                    int spm = (count_step-first_step)*(60-secs);
+                    kmperhour.setText(String.valueOf(spm));
+                    first_step = count_step;
+                    String time = String.format("%02d:%02d:%02d",hours,minutes,secs);
+                    timenum.setText(String.valueOf(time));
                     seconds++;
                 }
                 handler.postDelayed(this,1000);
+
+
             }
         });
     }

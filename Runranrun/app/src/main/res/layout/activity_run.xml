@@ -115,7 +115,8 @@
         android:layout_width="150dp"
         android:layout_height="200dp"
         android:gravity="center"
-        android:layout_marginTop="250dp">
+        android:layout_marginTop="250dp"
+        android:id="@+id/spmtext">
         <TextView
             android:id="@+id/spm"
             android:layout_width="wrap_content"
@@ -125,7 +126,7 @@
             android:textSize="30dp"
             />
         <TextView
-            android:id="@+id/kmperhour"
+            android:id="@+id/steppermin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -136,5 +137,46 @@
 
             />
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:gravity="center"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="50dp"
+        android:layout_toRightOf="@+id/spmtext">
+        <TextView
+            android:id="@+id/speedtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SPM"
+            android:layout_centerHorizontal="true"
+            android:textSize="30dp"
+            />
+        <TextView
+            android:id="@+id/speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="0.0"
+            android:layout_marginTop="50dp"
+            android:textSize="30dp"
+
+            />
+        <TextView
+            android:id="@+id/kmperhour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="km/h"
+            android:layout_toRightOf="@id/speed"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="6dp"
+            android:textSize="30dp"
+
+            />
+
+    </RelativeLayout>
+
 
 </RelativeLayout>

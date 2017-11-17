@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "92633436901",
+    "firebase_url": "https://runranrun-a104c.firebaseio.com",
+    "project_id": "runranrun-a104c",
+    "storage_bucket": "runranrun-a104c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:92633436901:android:5ad65b49d7121e4e",
+        "android_client_info": {
+          "package_name": "kmitl.project.bosstanayot.runranrun"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "92633436901-73a6k9kgfdmgmles6mr2j1lll0d708b6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kmitl.project.bosstanayot.runranrun",
+            "certificate_hash": "f42916a0bd771ff59854111896d8c211bf8a3693"
+          }
+        },
+        {
+          "client_id": "92633436901-kbe6sofl4pk7fnvbgdacvpgvbja7dkfu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkcDkghHF87DY69kz-PhTw54sfWpn5xjo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "92633436901-kbe6sofl4pk7fnvbgdacvpgvbja7dkfu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

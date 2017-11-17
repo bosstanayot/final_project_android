@@ -23,13 +23,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
     TabLayout MyTabs;
     ViewPager MyPage;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +46,25 @@ public class MainActivity extends AppCompatActivity {
         MyTabs.setupWithViewPager(MyPage);
         SetUpViewPager(MyPage);
 
+       /** if(AccessToken.getCurrentAccessToken() == null){
+            goLoginScreen();
+        }**/
+        /**FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null){
+            String name = user.getDisplayName();
+            testname.setText(name);
+        }else{
+            goLoginScreen();
+        }**/
 
 
+    }
+
+    private void goLoginScreen() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 
     public void SetUpViewPager (ViewPager viewpage){
@@ -73,7 +94,11 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    public void logout(View view) {
+        FirebaseAuth.getInstance().signOut();
+        LoginManager.getInstance().logOut();
+        goLoginScreen();
+    }
 }
 
 

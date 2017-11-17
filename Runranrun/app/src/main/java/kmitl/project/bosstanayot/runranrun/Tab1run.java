@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.facebook.login.LoginManager;
+
 /**
  * Created by barjord on 11/8/2017 AD.
  */
@@ -39,5 +41,7 @@ public class Tab1run  extends Fragment {
 
 
     }
+
+
 }
 

@@ -7,10 +7,19 @@
     tools:context="kmitl.project.bosstanayot.runranrun.Tab2profile">
 
     <TextView
-        android:id="@+id/section_label"
+        android:id="@+id/nameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="tab2 for profile"
+        android:textSize="30dp"
         />
+    <Button
+        android:onClick="logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/com_facebook_loginview_log_out_button"/>
+
 
 </RelativeLayout>

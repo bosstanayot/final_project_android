@@ -69,4 +69,9 @@ public class SplashCount extends Activity {
         handler.removeCallbacks(runnable);
         time = delay_time - (System.currentTimeMillis() - time);
     }*/
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

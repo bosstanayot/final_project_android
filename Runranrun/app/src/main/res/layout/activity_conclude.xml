@@ -5,38 +5,119 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="kmitl.project.bosstanayot.runranrun.ConcludeActivity">
+    <!--<RelativeLayout
+        android:id="@+id/imglayout"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginTop="20dp">-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="250dp"
+        android:layout_toRightOf="@id/alldistance"
+        android:textSize="17dp"
+        android:text="Total steps"/>
+
     <TextView
         android:id="@+id/allsteps"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="000000"
-        android:textSize="17dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginLeft="20dp"/>
-    <TextView
-        android:id="@+id/alldistance"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_toRightOf="@id/allsteps"
-        android:text="000000"
-        android:textSize="17dp"
-        android:layout_marginTop="200dp"
-        />
-    <TextView
-        android:id="@+id/alltime"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="230dp"
         android:layout_toRightOf="@id/alldistance"
         android:text="000000"
         android:textSize="17dp"
-        android:layout_marginTop="200dp"
+        android:gravity="center"
+     />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="180dp"
+        android:text="Total dulation"
+        android:textSize="17dp"
+        android:gravity="center"
         />
-    <ImageView
-        android:id="@+id/shareView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="0.0" />
+    <TextView
+        android:id="@+id/alltime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="160dp"
+        android:text="000000"
+        android:textSize="17dp"
+        android:gravity="center"
+ />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="250dp"
+        android:text="Distance"
+        android:textSize="17dp"
+        android:gravity="center"/>
+    <TextView
+        android:id="@+id/alldistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="230dp"
+        android:text="000000"
+        android:textSize="17dp"
+        android:gravity="center"/>
+    <TextView
+        android:id="@+id/timeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="16dp"
+        android:text="Time"
+        android:layout_centerHorizontal="true"
+        />
+    <TextView
+        android:id="@+id/totalTimeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="0 hour 00 min 00 sec"
+        android:textSize="35dp"
+        android:layout_centerHorizontal="true"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="320dp"
+        android:text="Calories"
+        android:textSize="17dp"
+        android:gravity="center"/>
+    <TextView
+        android:id="@+id/caltext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="300dp"
+        android:text="000000"
+        android:textSize="17dp"
+        android:gravity="center"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="400dp"
+        android:text="Avg. speed"
+        android:textSize="17dp"
+        android:gravity="center"/>
+    <TextView
+        android:id="@+id/speedtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="380dp"
+        android:text="000000"
+        android:textSize="17dp"
+        android:gravity="center"/>
+    <!--</RelativeLayout>-->
 
 </RelativeLayout>

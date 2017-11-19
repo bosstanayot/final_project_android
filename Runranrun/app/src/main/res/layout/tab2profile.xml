@@ -5,21 +5,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="kmitl.project.bosstanayot.runranrun.Tab2profile">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        />
+
 
     <TextView
         android:id="@+id/nameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="tab2 for profile"
+        android:text="Name"
         android:textSize="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         />
     <Button
-        android:onClick="logout"
+        android:id="@+id/number"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/nameTextView"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="60dp"
+        android:text="Weight"/>
+    <Button
+        android:id="@+id/genderText"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/nameTextView"
+        android:layout_marginLeft="60dp"
+        android:text="Gender"/>
+    <!--<TextView
+        android:id="@+id/uidtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Uid"
+        android:textSize="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/nameTextView"
+        />-->
+    <Button
+        android:id="@+id/logoutbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="@string/com_facebook_loginview_log_out_button"/>
+
 
 
 </RelativeLayout>

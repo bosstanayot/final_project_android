@@ -60,13 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void goLoginScreen() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
-    }
-
     public void SetUpViewPager (ViewPager viewpage){
         MyViewPageAdapter Adapter = new MyViewPageAdapter(getSupportFragmentManager());
 
@@ -92,12 +85,6 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         return super.onOptionsItemSelected(item);
-    }
-
-    public void logout(View view) {
-        FirebaseAuth.getInstance().signOut();
-        LoginManager.getInstance().logOut();
-        goLoginScreen();
     }
 }
 

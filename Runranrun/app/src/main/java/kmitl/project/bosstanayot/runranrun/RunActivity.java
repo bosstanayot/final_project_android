@@ -1,12 +1,15 @@
 package kmitl.project.bosstanayot.runranrun;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,6 +29,9 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
     Button start;
     Button cancel;
     String time;
+    int hours = 0;
+    int minutes = 0;
+    int secs = 0;
     TextView timenum;
     TextView speedtext;
     int first_step;
@@ -46,7 +52,7 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
         first_step = 0;
         step_num = findViewById(R.id.stepnum);
         dis_num = findViewById(R.id.disnum);
-        start = (Button) findViewById(R.id.pausebutton);
+        start =  findViewById(R.id.pausebutton);
         cancel = findViewById(R.id.cancel);
         timenum = findViewById(R.id.timenum);
         kmperhour = findViewById(R.id.steppermin);
@@ -60,9 +66,9 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
         handler.post(new Runnable() {
             @Override
             public void run() {
-                int hours = seconds/3600;
-                int minutes = (seconds%3600)/60;
-                int secs = seconds%60;
+                hours = seconds/3600;
+                minutes = (seconds%3600)/60;
+                secs = seconds%60;
                 if(running){
                     int spm = (count_step-first_step)*(60-secs); // Not straight
                     float speed = (getDistanceRun(count_step)-first_distance)*3600; //Not straight
@@ -146,6 +152,7 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
         intent.putExtra("count_step", count_step);//int
         intent.putExtra("distance", getDistanceRun(count_step));//float
         intent.putExtra("time", time);//String
+        intent.putExtra("sec", seconds);
         startActivity(intent);
         finish();
         //count_step = 0;
@@ -156,4 +163,26 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
         //Toast.makeText(RunActivity.this,String.valueOf(running),Toast.LENGTH_SHORT).show();
 
     }
+
+    @Override
+    public void onBackPressed() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(RunActivity.this);
+        builder.setMessage("Do you want to leave running?");
+        builder.setCancelable(true);
+        builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+               RunActivity.super.onBackPressed();
+            }
+        });
+        builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
 }

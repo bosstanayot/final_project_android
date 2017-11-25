@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kmitl.project.bosstanayot.runranrun.ShareActivity">
+    <RelativeLayout
+        android:id="@+id/cap_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:src="@drawable/running1705716_640"
+    android:scaleType="fitXY"
+    />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RunRanRun"
+        android:textColor="#FFFFFF"
+        android:textSize="18dp"/>
+        <TextView
+            android:id="@+id/caltxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_alignParentBottom="true"
+            android:text="Calories : "
+            android:layout_marginLeft="10dp"
+            android:textSize="18dp" />
+        <TextView
+            android:id="@+id/sharecal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_toRightOf="@+id/caltxt"
+            android:layout_alignParentBottom="true"
+            android:text="000"
+            android:textSize="18dp" />
+        <TextView
+            android:id="@+id/duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textColor="#FFFFFF"
+            android:layout_alignParentBottom="true"
+            android:text="00:00:00"
+            android:layout_marginRight="10dp"
+            android:textSize="18dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textColor="#FFFFFF"
+            android:layout_marginRight="80dp"
+            android:layout_alignParentBottom="true"
+            android:text="Duration : "
+            android:textSize="18dp" />
+    </RelativeLayout>
+    <Button
+        android:onClick="onShared"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
+        android:text="SHARE"
+        android:textSize="24dp"/>
+</RelativeLayout>

@@ -66,20 +66,32 @@ public class Tab2profile extends Fragment {
     String name;
     String photoUrl;
     Button number;
+    Button history;
     String mgender;
     String mweight;
     private Firebase mFirebase;
     int  num_weight;
-
     private int selected = 0;
     private int buffKey = 0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab2profile, container, false);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        mFirebase = new Firebase("https://runranrun-a104c.firebaseio.com/").child("profile");
+        history = rootView.findViewById(R.id.history);
         nameTextView = rootView.findViewById(R.id.nameTextView);
         display = rootView.findViewById(R.id.profile_image);
         logoutbtn = rootView.findViewById(R.id.logoutbtn);
+        genderText = rootView.findViewById(R.id.genderText);
+        number = rootView.findViewById(R.id.number);
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),HistotyActivity.class);
+                startActivity(intent);
+            }
+        });
         logoutbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,73 +100,70 @@ public class Tab2profile extends Fragment {
                 goLoginScreen();
             }
         });
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user != null){
-            for(UserInfo profile : user.getProviderData()) {
-                // check if the provider id matches "facebook.com"
-                if(FacebookAuthProvider.PROVIDER_ID.equals(profile.getProviderId())) {
-                    uid = AccessToken.getCurrentAccessToken().getUserId(); //use for get public profile on facebook;
-                }
-            }
-
-            name = user.getDisplayName();
-            photoUrl = "https://graph.facebook.com/" + uid + "/picture?height=500";
-            nameTextView.setText(name);
-            Picasso.with(getActivity()).load(photoUrl).into(display);
-
-        }else{
-            goLoginScreen();
-        }
-        number = rootView.findViewById(R.id.number);
         number.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 numberPickerDiallog();
             }
         });
-        genderText = rootView.findViewById(R.id.genderText);
         genderText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showDialogButtonClick();
             }
         });
-        mFirebase = new Firebase("https://runranrun-a104c.firebaseio.com/").child("profile");
+        if(user != null){
+            settingProfile(user);
+        }else{
+            goLoginScreen();
+        }
+
         queryData();
         return rootView;
     }
-    private void queryData() {
-        Query query = mFirebase;
 
-        query.addChildEventListener(new ChildEventListener() {
+
+    public void settingProfile(FirebaseUser user){
+        name = user.getDisplayName();
+        photoUrl = "https://graph.facebook.com/" + getUID(user) + "/picture?height=500";
+        nameTextView.setText(name);
+        Picasso.with(getActivity()).load(photoUrl).into(display);
+    }
+    public String  getUID(FirebaseUser user){
+        for(UserInfo profile : user.getProviderData()) {
+            // check if the provider id matches "facebook.com"
+            if(FacebookAuthProvider.PROVIDER_ID.equals(profile.getProviderId())) {
+                uid = AccessToken.getCurrentAccessToken().getUserId(); //use for get public profile on facebook;
+            }
+        }
+        return uid;
+    }
+
+    private void queryData() {
+
+        Query query = mFirebase.child(uid);
+        query.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 try{
                     Map<String, Object> newPost = (Map<String, Object>) dataSnapshot.getValue();
                     mgender = newPost.get("gender").toString();
-                    num_weight = Integer.parseInt(newPost.get("weight").toString());
                     genderText.setText(mgender);
-                    number.setText("weight: " + String.valueOf(num_weight)+"KG.");
                 }catch (Exception e){
-                    setProfile();
+                    mFirebase.child(uid).child("gender").setValue("gender");
+
                 }
+                try {
+                    Map<String, Object> newPost = (Map<String, Object>) dataSnapshot.getValue();
+                    mweight =newPost.get("weight").toString();
+                    num_weight = Integer.parseInt(mweight);
+                    if(num_weight != 0){
+                        number.setText("weight: " + String.valueOf(num_weight)+"KG.");
+                    }
 
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                    genderText.setText(mgender);
-                    number.setText(mweight);
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
+                }catch (Exception e){
+                    mFirebase.child(uid).child("weight").setValue("weight");
+                }
             }
 
             @Override
@@ -164,14 +173,9 @@ public class Tab2profile extends Fragment {
         });
     }
     private void setProfile() {
-     ProfileInfo profileInfo = new ProfileInfo(num_weight, uid);
         Map<String, Object> profile = new HashMap<String, Object>();
-        profile.put(uid+"/gender", gendername);
-        if(num_weight == 0){
-            profile.put(uid+"/weight", "Weight");
-        }else {
+            profile.put(uid+"/gender", gendername);
             profile.put(uid+"/weight", num_weight);
-        }
 
         mFirebase.updateChildren(profile);
         //mFirebase.push().setValue(profile);
@@ -199,6 +203,12 @@ public class Tab2profile extends Fragment {
         numberPicker.setOnValueChangedListener(myValChange);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(numberPicker);
         builder.setTitle("Select Weight").setIcon(R.mipmap.ic_launcher);
+        builder.setPositiveButton("cencel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
         builder.setNegativeButton("ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -206,7 +216,6 @@ public class Tab2profile extends Fragment {
                     number.setText("weight: " + weight[0]+ " KG.");
                     num_weight = weight[0];
                     setProfile();
-                    queryData();
                 }
             }
         });
@@ -214,27 +223,16 @@ public class Tab2profile extends Fragment {
     }
     // add buffer value
     private void showDialogButtonClick() {
-        Log.i(TAG, "show Dialog ButtonClick");
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(getActivity());
-        builder.setTitle("Show dialog");
-        final CharSequence[] choiceList =
-                {"Male", "Female" };
-        builder.setSingleChoiceItems(
-                choiceList,
-                selected,
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Select Gender");
+        final CharSequence[] choiceList = {"Male", "Female" };
+        builder.setSingleChoiceItems(choiceList, selected,
                 new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(
-                            DialogInterface dialog,
-                            int which) {
-//set to buffKey instead of selected
-//(when cancel not save to selected)
+                    public void onClick(DialogInterface dialog, int which) {
                         buffKey = which;
                     }
-                })
-                .setCancelable(false)
-                .setPositiveButton("Ok",
+                }).setCancelable(false).setPositiveButton("Ok",
                         new DialogInterface.OnClickListener()
                         {
                             @Override
@@ -242,21 +240,17 @@ public class Tab2profile extends Fragment {
                                                 int which) {
                                 //genderText.setText(choiceList[buffKey]);
                                 gendername = choiceList[buffKey];
+                                genderText.setText(gendername);
                                 selected = buffKey;
                                 setProfile();
-                                queryData();
-//set buff to selected
-
                             }
                         }
-                )
-                .setNegativeButton("Cancel",
+                ).setNegativeButton("Cancel",
                         new DialogInterface.OnClickListener()
                         {
                             @Override
-                            public void onClick(DialogInterface dialog,
-                                                int which) {
-
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
                             }
                         }
                 );

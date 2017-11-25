@@ -16,7 +16,7 @@ public class ProfileInfo {
     private int weight;
 
     private String gender;
-    private ProfileInfo() {
+    public ProfileInfo() {
         // Default Constructor for firebase mapping
     }
     public ProfileInfo(int weight, String gender) {

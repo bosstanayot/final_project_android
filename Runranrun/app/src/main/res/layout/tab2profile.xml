@@ -38,6 +38,14 @@
         android:layout_below="@+id/nameTextView"
         android:layout_marginLeft="60dp"
         android:text="Gender"/>
+    <Button
+        android:id="@+id/history"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/nameTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:text="History"/>
     <!--<TextView
         android:id="@+id/uidtext"
         android:layout_width="wrap_content"

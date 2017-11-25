@@ -1,28 +1,28 @@
 package kmitl.project.bosstanayot.runranrun;
 
-import android.content.ClipData;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.net.Uri;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.menu.MenuView;
-import android.text.Layout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+
+import com.facebook.AccessToken;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
+import com.firebase.client.ValueEventListener;
+import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
+
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ConcludeActivity extends AppCompatActivity {
     TextView allsteps;
@@ -31,20 +31,32 @@ public class ConcludeActivity extends AppCompatActivity {
     TextView totalTimeText;
     int count_step;
     float distance;
-    String time;
+    String duration;
     String currentDateTime;
     String total_time;
     TextView cal_text;
+    TextView speedText;
+    String mweight;
     int hour;
     int min;
     int sec;
-    int weight;
+    String uid;
+    double calorie;
+    int num_weight;
     TextView timetext;
+    int type;
+    private Firebase hisFirebase;
+    private Firebase firebaseCal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conclude);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        firebaseCal =  new Firebase("https://runranrun-a104c.firebaseio.com/profile/");
+        hisFirebase = new Firebase("https://runranrun-a104c.firebaseio.com/").child("history");
         Bundle bundle = getIntent().getExtras();
+        uid = setUid(user);
+        speedText = findViewById(R.id.speedtext);
         allsteps = findViewById(R.id.allsteps);
         alldistance = findViewById(R.id.alldistance);
         alltime = findViewById(R.id.alltime);
@@ -52,19 +64,47 @@ public class ConcludeActivity extends AppCompatActivity {
         cal_text = findViewById(R.id.caltext);
         totalTimeText = findViewById(R.id.totalTimeText);
         if (bundle != null) {
+            type = bundle.getInt("type");
+            if(type == 1) {
+                currentDateTime = bundle.getString("time");
+            }
+            sec = bundle.getInt("sec");
+            totalTimeText.setText(toTextTime(sec-1));
             count_step = bundle.getInt("count_step");
-             distance = bundle.getFloat("distance");
-             time = bundle.getString("time");
-             sec = bundle.getInt("sec");
-             totalTimeText.setText(toTextTime(sec-1));
+            distance = bundle.getFloat("distance");
+            duration = bundle.getString("duration");
         }
-        Tab2profile tab2profile = new Tab2profile();
-        weight = tab2profile.num_weight;
-        cal_text.setText(String.valueOf(setCal(weight,distance)));
+
+        calorie = getCal();
+        Log.d("mid", String.valueOf(calorie));
+        speedText.setText(String.valueOf(getAvgSp()));
         allsteps.setText(String.valueOf(count_step));
         alldistance.setText(String.valueOf(distance));
-        alltime.setText(String.valueOf(time));
+        alltime.setText(String.valueOf(duration));
+        cal_text.setText(String.valueOf(calorie));
+        Log.d("after", String.valueOf(calorie));
         getDateTime();
+        sendHistory();
+        Log.d("last", String.valueOf(calorie));
+    }
+    private void  sendHistory(){
+
+
+    }
+    private String getAvgSp() {
+        double avgSp = distance/(sec*0.00027778);
+        String txt_Avg = String.format("%.2f", avgSp);
+        return txt_Avg;
+    }
+
+    public String setUid(FirebaseUser user){
+        for(UserInfo profile : user.getProviderData()) {
+            // check if the provider id matches "facebook.com"
+            if(FacebookAuthProvider.PROVIDER_ID.equals(profile.getProviderId())) {
+                uid = AccessToken.getCurrentAccessToken().getUserId(); //use for get public profile on facebook;
+            }
+        }
+        return uid;
     }
 
     @Override
@@ -73,7 +113,49 @@ public class ConcludeActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_share, menu);
         return true;
     }
+    public double getCal(){
+        final double[] calll = new double[1];
+        Log.d("first callll", String.valueOf(calll[0]));
+        Query query = firebaseCal.child(uid);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                    Map<String, Object> newPost = (Map<String, Object>) dataSnapshot.getValue();
+                    mweight =newPost.get("weight").toString();
+                Log.d("second callll", String.valueOf(calll[0]));
+                    if(mweight != "weight"){
+                        num_weight = Integer.parseInt(mweight);
+                        calorie = num_weight*distance*1.035;
+                        calll[0] = calorie;
+                        Log.d("after set callll", String.valueOf(calll[0]));
+                        CalModel calModel = new CalModel();
+                        calModel.setCal((int)calorie);
+                        Log.d("after callmodel callll", String.valueOf(calModel.getCal()));
+                        cal_text.setText(String.valueOf((int)calorie));
+                        if(type == 0){
+                            Map<String, Object> his = new HashMap<String, Object>();
+                            //his.put("uid", uid);
+                            his.put("step", count_step);
+                            his.put("sec", sec);
+                            his.put("calories", (int)calorie);
+                            his.put("duration", duration);
+                            his.put("time", currentDateTime);
+                            his.put("distance", distance);
+                            hisFirebase.child(uid).push().setValue(his);
+                        }
+                    }
 
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+        Log.d("last callll", String.valueOf(calll[0]));
+        return calll[0];
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -83,51 +165,20 @@ public class ConcludeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     public void onShare(MenuItem menuItem) {
-        RelativeLayout imageView;
-        //imageView = findViewById(R.id.imglayout);
-        //Bitmap b = Screenshot.takescreenshot(imageView);
-        //saveBitmap(b);
-        File imagePath = new File(this.getCacheDir(), "images");
-        File newFile = new File(imagePath, "image.png");
-        Uri contentUri = FileProvider.getUriForFile(this, "kmitl.project.bosstanayot.runranrun.fileprovider", newFile);
-        if (contentUri != null) {
-            Intent shareIntent = new Intent();
-            shareIntent.setAction(Intent.ACTION_SEND);
-            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // temp permission for receiving app to read this file
-            shareIntent.setDataAndType(contentUri, getContentResolver().getType(contentUri));
-            shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
-            startActivity(Intent.createChooser(shareIntent, "Choose an app"));
-
-        }
-    }
-
-    /**private Bitmap createBitmapFromView(View view) {
-        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas c = new Canvas(bitmap);
-        view.layout(view.getLeft(), view.getTop(), view.getRight(), view.getBottom());
-        view.draw(c);
-        return bitmap;
-    }**/
-
-    private void saveBitmap(Bitmap bitmap) {
-        // save bitmap to cache directory
-        try {
-            File cachePath = new File(this.getCacheDir(), "images");
-            cachePath.mkdirs(); // don't forget to make the directory
-            FileOutputStream stream = new FileOutputStream(cachePath + "/image.png"); // overwrites this image every time
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            stream.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Intent intent = new Intent(this, ShareActivity.class);
+        intent.putExtra("cal", cal_text.getText());
+        intent.putExtra("duration", duration);//int
+        startActivity(intent);
     }
 
     public void onDone(MenuItem item) {
         super.onBackPressed();
     }
     public void getDateTime(){
-        currentDateTime = DateFormat.getDateTimeInstance().format(new Date());
+
+        if(type == 0){
+            currentDateTime = DateFormat.getDateTimeInstance().format(new Date());
+        }
         timetext.setText(currentDateTime);
     }
     public String toTextTime(int seconds){
@@ -143,9 +194,9 @@ public class ConcludeActivity extends AppCompatActivity {
         }
         return total_time;
     }
-    public int setCal(int weight, float duration){
-        Double cal = weight*duration*1.035;
-        int callorie = cal.intValue();
-        return callorie;
+    public int setCal(int weight, float distance){
+        Double cal = weight*distance*1.035;
+        int callories = cal.intValue();
+        return callories;
     }
 }

@@ -149,9 +149,10 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
         start.setText("Start");
         cancel.setVisibility(View.GONE);
         Intent intent = new Intent(this, ConcludeActivity.class);
+        intent.putExtra("type", 0);
         intent.putExtra("count_step", count_step);//int
         intent.putExtra("distance", getDistanceRun(count_step));//float
-        intent.putExtra("time", time);//String
+        intent.putExtra("duration", time);//String
         intent.putExtra("sec", seconds);
         startActivity(intent);
         finish();

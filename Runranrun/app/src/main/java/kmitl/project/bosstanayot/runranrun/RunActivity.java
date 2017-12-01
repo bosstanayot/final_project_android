@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import info.hoang8f.widget.FButton;
+
 public class RunActivity extends AppCompatActivity implements SensorEventListener {
     boolean running = true;
     private SensorManager mSensorManager;
@@ -26,8 +28,8 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
     TextView dis_num;
     TextView kmperhour;
     int count_step;
-    Button start;
-    Button cancel;
+    FButton start;
+    FButton cancel;
     String time;
     int hours = 0;
     int minutes = 0;
@@ -43,7 +45,6 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_run);
-
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
         mSensorManager.registerListener(this,mSensor,SensorManager.SENSOR_DELAY_UI);
@@ -57,6 +58,8 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
         timenum = findViewById(R.id.timenum);
         kmperhour = findViewById(R.id.steppermin);
         speedtext = findViewById(R.id.speed);
+        cancel.setButtonColor(getResources().getColor(R.color.fbutton_color_alizarin));
+        start.setButtonColor(getResources().getColor(R.color.fbutton_color_sun_flower));
         handler = new Handler();
         runTimer();
 
@@ -132,15 +135,13 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
         step_num.setText(String.valueOf(count_step));
         if(running == true ){
             running = false;
-            start.setText("Back");
+            start.setText("Unpause");
             cancel.setVisibility(View.VISIBLE);
-            Toast.makeText(RunActivity.this,String.valueOf(running),Toast.LENGTH_SHORT).show();
 
         }else{
             running = true;
             start.setText("Pause");
             cancel.setVisibility(View.GONE);
-            Toast.makeText(RunActivity.this,String.valueOf(running),Toast.LENGTH_SHORT).show();
         }
     }
 

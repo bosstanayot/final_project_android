@@ -48,6 +48,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import info.hoang8f.widget.FButton;
 
 import static android.content.ContentValues.TAG;
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -60,13 +61,13 @@ public class Tab2profile extends Fragment {
     private TextView nameTextView;
     private CircleImageView display;
     String uid;
-    Button logoutbtn;
-    Button genderText;
+    FButton logoutbtn;
+    FButton genderText;
     CharSequence gendername;
     String name;
     String photoUrl;
-    Button number;
-    Button history;
+    FButton number;
+    FButton history;
     String mgender;
     String mweight;
     private Firebase mFirebase;
@@ -85,6 +86,10 @@ public class Tab2profile extends Fragment {
         logoutbtn = rootView.findViewById(R.id.logoutbtn);
         genderText = rootView.findViewById(R.id.genderText);
         number = rootView.findViewById(R.id.number);
+        genderText.setButtonColor(getResources().getColor(R.color.colorPrimary));
+        number.setButtonColor(getResources().getColor(R.color.colorPrimary));
+        history.setButtonColor(getResources().getColor(R.color.colorPrimary));
+        logoutbtn.setButtonColor(getResources().getColor(R.color.com_facebook_blue));
         history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

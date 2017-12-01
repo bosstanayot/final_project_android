@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="0000"
+            android:textColor="@color/colorPrimary"
             android:textSize="30dp"
             />
 
@@ -57,6 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Distance :"
+            android:textColor="@color/colorPrimary"
             android:textSize="20dp"/>
         <TextView
             android:id="@+id/con_distan"
@@ -86,6 +88,7 @@
             android:id="@+id/durText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
             android:text="Duration :"
             android:textSize="20dp"/>
         <TextView

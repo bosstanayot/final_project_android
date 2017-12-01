@@ -10,31 +10,55 @@
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_marginTop="20dp">-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/stepImg"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="120dp"
+        android:layout_toRightOf="@+id/disImg"
+        android:layout_marginTop="240dp"
+        android:src="@drawable/footstepssilhouettevariant2"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="250dp"
-        android:layout_toRightOf="@id/alldistance"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="270dp"
+        android:layout_toRightOf="@id/stepImg"
         android:textSize="17dp"
+        android:textColor="@color/colorPrimary"
         android:text="Total steps"/>
-
     <TextView
         android:id="@+id/allsteps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="230dp"
-        android:layout_toRightOf="@id/alldistance"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="250dp"
+        android:layout_toRightOf="@id/stepImg"
         android:text="000000"
         android:textSize="17dp"
         android:gravity="center"
      />
+    <ImageView
+        android:id="@+id/duraImg"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="155dp"
+        android:src="@drawable/clock1"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_toRightOf="@+id/duraImg"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="180dp"
+        android:textColor="@color/colorPrimary"
         android:text="Total dulation"
         android:textSize="17dp"
         android:gravity="center"
@@ -43,26 +67,37 @@
         android:id="@+id/alltime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
         android:layout_marginTop="160dp"
+        android:layout_toRightOf="@+id/duraImg"
+        android:layout_marginStart="10dp"
         android:text="000000"
         android:textSize="17dp"
         android:gravity="center"
  />
+    <ImageView
+        android:id="@+id/disImg"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="245dp"
+        android:src="@drawable/distance2"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="250dp"
+        android:layout_toRightOf="@+id/duraImg"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="270dp"
         android:text="Distance"
         android:textSize="17dp"
+        android:textColor="@color/colorPrimary"
         android:gravity="center"/>
     <TextView
         android:id="@+id/alldistance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="230dp"
+        android:layout_toRightOf="@+id/duraImg"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="250dp"
         android:text="000000"
         android:textSize="17dp"
         android:gravity="center"/>
@@ -81,43 +116,65 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:text="0 hour 00 min 00 sec"
+        android:textColor="@color/colorPrimary"
         android:textSize="35dp"
         android:layout_centerHorizontal="true"
         />
+    <ImageView
+        android:id="@+id/calImg"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="335dp"
+        android:src="@drawable/calories2"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="320dp"
+        android:layout_marginTop="360dp"
+        android:layout_toRightOf="@+id/duraImg"
+        android:layout_marginStart="10dp"
         android:text="Calories"
         android:textSize="17dp"
+        android:textColor="@color/colorPrimary"
         android:gravity="center"/>
     <TextView
         android:id="@+id/caltext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="300dp"
+        android:layout_toRightOf="@+id/duraImg"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="340dp"
         android:text="000000"
         android:textSize="17dp"
         android:gravity="center"/>
+    <ImageView
+        android:id="@+id/speedImg"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="435dp"
+        android:src="@drawable/speed"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="400dp"
+        android:layout_toRightOf="@+id/duraImg"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="460dp"
         android:text="Avg. speed"
+        android:textColor="@color/colorPrimary"
         android:textSize="17dp"
         android:gravity="center"/>
     <TextView
         android:id="@+id/speedtext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="380dp"
+        android:layout_toRightOf="@+id/duraImg"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="440dp"
         android:text="000000"
         android:textSize="17dp"
         android:gravity="center"/>
     <!--</RelativeLayout>-->
-
+</RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

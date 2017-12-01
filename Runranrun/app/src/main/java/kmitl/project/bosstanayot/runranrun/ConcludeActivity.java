@@ -20,8 +20,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ConcludeActivity extends AppCompatActivity {
@@ -40,11 +42,13 @@ public class ConcludeActivity extends AppCompatActivity {
     int hour;
     int min;
     int sec;
+    int second;
     String uid;
     double calorie;
     int num_weight;
     TextView timetext;
     int type;
+    private List<String> testtest = new ArrayList<String>();
     private Firebase hisFirebase;
     private Firebase firebaseCal;
     @Override
@@ -68,31 +72,36 @@ public class ConcludeActivity extends AppCompatActivity {
             if(type == 1) {
                 currentDateTime = bundle.getString("time");
             }
-            sec = bundle.getInt("sec");
-            totalTimeText.setText(toTextTime(sec-1));
+            second = bundle.getInt("sec");
+            totalTimeText.setText(toTextTime(second-1));
             count_step = bundle.getInt("count_step");
             distance = bundle.getFloat("distance");
             duration = bundle.getString("duration");
         }
 
-        calorie = getCal();
-        Log.d("mid", String.valueOf(calorie));
+        getCal();
         speedText.setText(String.valueOf(getAvgSp()));
         allsteps.setText(String.valueOf(count_step));
         alldistance.setText(String.valueOf(distance));
         alltime.setText(String.valueOf(duration));
-        cal_text.setText(String.valueOf(calorie));
-        Log.d("after", String.valueOf(calorie));
         getDateTime();
-        sendHistory();
-        Log.d("last", String.valueOf(calorie));
     }
     private void  sendHistory(){
-
+        if(type == 0){
+            Map<String, Object> his = new HashMap<String, Object>();
+            //his.put("uid", uid);
+            his.put("step", count_step);
+            his.put("sec", second);
+            his.put("calories", (int)calorie);
+            his.put("duration", duration);
+            his.put("time", currentDateTime);
+            his.put("distance", distance);
+            hisFirebase.child(uid).push().setValue(his);
+        }
 
     }
     private String getAvgSp() {
-        double avgSp = distance/(sec*0.00027778);
+        double avgSp = distance/(second*0.00027778);
         String txt_Avg = String.format("%.2f", avgSp);
         return txt_Avg;
     }
@@ -113,7 +122,7 @@ public class ConcludeActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_share, menu);
         return true;
     }
-    public double getCal(){
+    public void getCal(){
         final double[] calll = new double[1];
         Log.d("first callll", String.valueOf(calll[0]));
         Query query = firebaseCal.child(uid);
@@ -122,28 +131,16 @@ public class ConcludeActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                     Map<String, Object> newPost = (Map<String, Object>) dataSnapshot.getValue();
                     mweight =newPost.get("weight").toString();
-                Log.d("second callll", String.valueOf(calll[0]));
-                    if(mweight != "weight"){
-                        num_weight = Integer.parseInt(mweight);
-                        calorie = num_weight*distance*1.035;
-                        calll[0] = calorie;
-                        Log.d("after set callll", String.valueOf(calll[0]));
-                        CalModel calModel = new CalModel();
-                        calModel.setCal((int)calorie);
-                        Log.d("after callmodel callll", String.valueOf(calModel.getCal()));
+                    Log.d("second callll", String.valueOf(calll[0]));
+                try{
+                    num_weight = Integer.parseInt(mweight);
+                }catch (Exception e){
+                    num_weight = 55;
+                }
+                        calorie = (double) num_weight*(double)distance*(double)1.035;
                         cal_text.setText(String.valueOf((int)calorie));
-                        if(type == 0){
-                            Map<String, Object> his = new HashMap<String, Object>();
-                            //his.put("uid", uid);
-                            his.put("step", count_step);
-                            his.put("sec", sec);
-                            his.put("calories", (int)calorie);
-                            his.put("duration", duration);
-                            his.put("time", currentDateTime);
-                            his.put("distance", distance);
-                            hisFirebase.child(uid).push().setValue(his);
-                        }
-                    }
+                        sendHistory();
+
 
 
             }
@@ -154,7 +151,6 @@ public class ConcludeActivity extends AppCompatActivity {
             }
         });
         Log.d("last callll", String.valueOf(calll[0]));
-        return calll[0];
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -166,7 +162,7 @@ public class ConcludeActivity extends AppCompatActivity {
     }
     public void onShare(MenuItem menuItem) {
         Intent intent = new Intent(this, ShareActivity.class);
-        intent.putExtra("cal", cal_text.getText());
+        intent.putExtra("cal", calorie);
         intent.putExtra("duration", duration);//int
         startActivity(intent);
     }
@@ -193,10 +189,5 @@ public class ConcludeActivity extends AppCompatActivity {
             total_time = String.format("%d hour %d min %d sec",hour,min,sec);
         }
         return total_time;
-    }
-    public int setCal(int weight, float distance){
-        Double cal = weight*distance*1.035;
-        int callories = cal.intValue();
-        return callories;
     }
 }

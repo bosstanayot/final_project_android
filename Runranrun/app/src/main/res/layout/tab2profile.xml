@@ -7,10 +7,10 @@
     tools:context="kmitl.project.bosstanayot.runranrun.Tab2profile">
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         />
 
 
@@ -23,28 +23,38 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         />
-    <Button
+    <info.hoang8f.widget.FButton
         android:id="@+id/number"
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="60dp"
         android:layout_below="@+id/nameTextView"
+        android:layout_marginTop="10dp"
         android:layout_alignParentRight="true"
         android:layout_marginRight="60dp"
+        app:shadowColor="#BEBEBE"
+        app:buttonColor="@color/colorPrimary"
+        android:textColor="#FFFFFF"
         android:text="Weight"/>
-    <Button
+    <info.hoang8f.widget.FButton
         android:id="@+id/genderText"
+        android:layout_marginTop="10dp"
         android:layout_width="100dp"
         android:layout_height="60dp"
         android:layout_below="@+id/nameTextView"
+        app:buttonColor="@color/colorPrimary"
+        android:textColor="#FFFFFF"
+        app:shadowColor="#BEBEBE"
         android:layout_marginLeft="60dp"
         android:text="Gender"/>
-    <Button
+    <info.hoang8f.widget.FButton
         android:id="@+id/history"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@+id/nameTextView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
+        app:shadowColor="#BEBEBE"
+        android:textColor="#FFFFFF"
         android:text="History"/>
     <!--<TextView
         android:id="@+id/uidtext"
@@ -56,13 +66,15 @@
         android:layout_marginTop="20dp"
         android:layout_below="@+id/nameTextView"
         />-->
-    <Button
+    <info.hoang8f.widget.FButton
         android:id="@+id/logoutbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/com_facebook_loginview_log_out_button"/>
+        android:shadowColor="#BEBEBE"
+        android:textColor="#FFFFFF"
+        android:text="LOGOUT"/>
 
 
 

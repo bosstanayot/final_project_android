@@ -9,13 +9,13 @@
 
     tools:context="kmitl.project.bosstanayot.runranrun.RunActivity">
 
-
     <TextView
         android:id="@+id/namestep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="step"
         android:textSize="50dp"
+        android:textColor="@color/colorPrimary"
         android:layout_centerHorizontal="true"
         />
     <TextView
@@ -30,6 +30,7 @@
     <RelativeLayout
         android:layout_width="150dp"
         android:layout_height="200dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="150dp"
         android:id="@+id/dis_lay">
     <TextView
@@ -37,6 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Distance"
+        android:textColor="@color/colorPrimary"
         android:layout_centerHorizontal="true"
         android:textSize="30dp"
         />
@@ -68,13 +70,14 @@
         android:layout_height="200dp"
         android:layout_marginTop="150dp"
         android:layout_toRightOf="@id/dis_lay"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="10dp"
         >
         <TextView
             android:id="@+id/Time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Time"
+            android:textColor="@color/colorPrimary"
             android:layout_centerHorizontal="true"
             android:textSize="30dp"
             />
@@ -97,23 +100,28 @@
         android:layout_alignParentBottom="true"
         android:gravity="center">
 
-        <Button
+        <info.hoang8f.widget.FButton
             android:id="@+id/pausebutton"
             android:onClick="start"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:shadowColor="#BEBEBE"
+            android:textColor="#FFFFFF"
             android:text="Pause" />
-        <Button
+        <info.hoang8f.widget.FButton
             android:id="@+id/cancel"
             android:onClick="cancel"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:shadowColor="#BEBEBE"
+            android:textColor="#FFFFFF"
             android:visibility="gone"
             android:text="Cancel" />
     </LinearLayout>
     <RelativeLayout
         android:layout_width="150dp"
         android:layout_height="200dp"
+        android:layout_marginLeft="20dp"
         android:gravity="center"
         android:layout_marginTop="250dp"
         android:id="@+id/spmtext">
@@ -121,6 +129,7 @@
             android:id="@+id/spm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
             android:text="SPM"
             android:layout_centerHorizontal="true"
             android:textSize="30dp"
@@ -139,17 +148,18 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="150dp"
+        android:layout_width="185dp"
         android:layout_height="200dp"
         android:gravity="center"
         android:layout_marginTop="250dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/spmtext">
         <TextView
             android:id="@+id/speedtext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SPM"
+            android:text="Speed"
+            android:textColor="@color/colorPrimary"
             android:layout_centerHorizontal="true"
             android:textSize="30dp"
             />
@@ -158,7 +168,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="0.0"
+            android:text="00.00"
             android:layout_marginTop="50dp"
             android:textSize="30dp"
 
@@ -177,6 +187,5 @@
             />
 
     </RelativeLayout>
-
 
 </RelativeLayout>

@@ -51,7 +51,7 @@ public class HistotyActivity extends AppCompatActivity {
                 Map<String, Object> newPost = (Map<String, Object>) dataSnapshot.getValue();
                     HistoryModel listItem = new HistoryModel(
                             newPost.get("time").toString(),newPost.get("calories").toString(),newPost.get("distance").toString(),newPost.get("duration").toString()
-                            ,newPost.get("sec").toString(),newPost.get("step").toString()
+                            ,newPost.get("step").toString(),newPost.get("sec").toString()
                     );
                     listItems.add(0,listItem);
 

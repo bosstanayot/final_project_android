@@ -31,12 +31,14 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         holder.con_distan.setText(listItem.getDistance());
         holder.con_dur.setText(listItem.getDuration());
         holder.con_cal.setText(listItem.getCalories());
+
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), ConcludeActivity.class);
                 intent.putExtra("type", 1);
                 intent.putExtra("duration", listItem.getDuration());
+                String s = listItem.getSec();
                 intent.putExtra("count_step", Integer.parseInt(listItem.getCount_step()));//int
                 intent.putExtra("distance", Float.parseFloat(listItem.getDistance()));//float
                 intent.putExtra("time", listItem.getTime());//String

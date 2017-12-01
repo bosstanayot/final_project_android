@@ -4,17 +4,20 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:gravity="center"
     tools:context="kmitl.project.bosstanayot.runranrun.Tab1run">
 
+    <at.markushi.ui.CircleButton
 
-
-    <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_centerHorizontal="true"
-        android:text="Button" />
-
+        android:textSize="30dp"
+        app:cb_color="@color/colorPrimary"
+        app:cb_pressedRingWidth="8dip"
+        android:textColor="#FFFFFF"
+        android:src="@drawable/runningstart3"
+        android:text="RUN" />
 
 </RelativeLayout>

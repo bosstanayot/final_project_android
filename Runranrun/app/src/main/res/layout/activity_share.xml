@@ -8,19 +8,33 @@
     <RelativeLayout
         android:id="@+id/cap_Layout"
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="350dp">
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:scrollbars="horizontal">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:scrollbars="vertical">
+
 <ImageView
+    android:id="@+id/runbg"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
+    android:layout_height="match_parent"
     android:src="@drawable/running1705716_640"
-    android:scaleType="fitXY"
-    />
+    android:adjustViewBounds="true"
+    android:scaleType="centerCrop"
+
+        />
+        </ScrollView>
+    </HorizontalScrollView>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="RunRanRun"
         android:textColor="#FFFFFF"
-        android:textSize="18dp"/>
+        android:textSize="21dp"/>
         <TextView
             android:id="@+id/caltxt"
             android:layout_width="wrap_content"
@@ -29,7 +43,7 @@
             android:layout_alignParentBottom="true"
             android:text="Calories : "
             android:layout_marginLeft="10dp"
-            android:textSize="18dp" />
+            android:textSize="21dp" />
         <TextView
             android:id="@+id/sharecal"
             android:layout_width="wrap_content"
@@ -38,7 +52,7 @@
             android:layout_toRightOf="@+id/caltxt"
             android:layout_alignParentBottom="true"
             android:text="000"
-            android:textSize="18dp" />
+            android:textSize="21dp" />
         <TextView
             android:id="@+id/duration"
             android:layout_width="wrap_content"
@@ -48,23 +62,25 @@
             android:layout_alignParentBottom="true"
             android:text="00:00:00"
             android:layout_marginRight="10dp"
-            android:textSize="18dp" />
+            android:textSize="21dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:textColor="#FFFFFF"
-            android:layout_marginRight="80dp"
+            android:layout_marginRight="90dp"
             android:layout_alignParentBottom="true"
             android:text="Duration : "
-            android:textSize="18dp" />
+            android:textSize="21dp" />
     </RelativeLayout>
-    <Button
+    <info.hoang8f.widget.FButton
+        android:id="@+id/sharebtn"
         android:onClick="onShared"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-        android:background="#FFFFFF"
+        android:shadowColor="#BEBEBE"
+        android:textColor="#FFFFFF"
         android:text="SHARE"
         android:textSize="24dp"/>
 </RelativeLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kmitl.project.bosstanayot.runranrun.ShareActivity">
+    tools:context="kmitl.project.bosstanayot.runranrun.Control.ShareActivity">
     <RelativeLayout
         android:id="@+id/cap_Layout"
         android:layout_width="match_parent"

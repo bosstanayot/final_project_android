@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kmitl.project.bosstanayot.runranrun.ConcludeActivity">
+    tools:context="kmitl.project.bosstanayot.runranrun.Control.ConcludeActivity">
     <!--<RelativeLayout
         android:id="@+id/imglayout"
         android:layout_width="match_parent"

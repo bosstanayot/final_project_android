@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="kmitl.project.bosstanayot.runranrun.RunActivity">
+    tools:context="kmitl.project.bosstanayot.runranrun.Control.RunActivity">
 
     <TextView
         android:id="@+id/namestep"

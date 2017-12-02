@@ -6,7 +6,7 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 
 android:background="@color/colorPrimary"
-    tools:context="kmitl.project.bosstanayot.runranrun.SplashCount"
+    tools:context="kmitl.project.bosstanayot.runranrun.View.SplashCount"
     >
     <!--<pl.droidsonroids.gif.GifImageView
        android:layout_width="match_parent"

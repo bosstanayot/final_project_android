@@ -92,10 +92,10 @@ public class Tab2profile extends Fragment {
         });
         if(user != null){
             settingProfile(user);
+            queryData();
         }else{
             goLoginScreen();
         }
-        queryData();
         return rootView;
     }
     public void settingProfile(FirebaseUser user){
@@ -164,7 +164,7 @@ public class Tab2profile extends Fragment {
         final int[] weight = new int[1];
         NumberPicker numberPicker = new NumberPicker(getActivity());
         numberPicker.setMaxValue(200);
-        numberPicker.setMinValue(0);
+        numberPicker.setMinValue(1);
         numberPicker.setValue(num_weight);
         NumberPicker.OnValueChangeListener myValChange = new NumberPicker.OnValueChangeListener(){
 

@@ -26,7 +26,7 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
     FButton start, cancel;
     String time;
     TextView timenum, speedtext;
-    float first_distance;
+    double first_distance;
     Handler handler = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
                 secs = seconds%60;
                 if(running){
                     int spm = (count_step-first_step)*(60);
-                    float speed = (getDistanceRun(count_step)-first_distance)*3600;
+                    double speed = (getDistanceRun(count_step)-first_distance)*3600;
                     String kmph = String.format("%.2f",speed);
                     speedtext.setText(String.valueOf(kmph));
                     kmperhour.setText(String.valueOf(spm));
@@ -94,8 +94,8 @@ public class RunActivity extends AppCompatActivity implements SensorEventListene
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
     }
-    public float getDistanceRun(long steps){
-        float distance = (float)(steps*78)/(float)100000;
+    public double getDistanceRun(double steps){
+        double distance = (double) (steps*78)/(double) 100000;
         return distance;
     }
     public void start(View view) {

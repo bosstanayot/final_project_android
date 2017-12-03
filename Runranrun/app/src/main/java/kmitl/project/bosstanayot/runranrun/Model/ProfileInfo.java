@@ -1,5 +1,11 @@
 package kmitl.project.bosstanayot.runranrun.Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import kmitl.project.bosstanayot.runranrun.Validator.NullWeightValidator;
+import kmitl.project.bosstanayot.runranrun.Validator.UserWeightValidator;
+
 /**
  * Created by barjord on 11/20/2017 AD.
  */
@@ -25,7 +31,11 @@ public class ProfileInfo {
     }
 
     public ProfileInfo(int weight, String gender, String uid) {
-        setWeight(weight);
+        try {
+            setWeight(weight);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         setGender(gender);
         setUid(uid);
     }
@@ -33,7 +43,14 @@ public class ProfileInfo {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(int weight)throws Exception {
+        List<UserWeightValidator> userWeightValidators = new ArrayList<>();
+        userWeightValidators.add(new NullWeightValidator());
+        for (UserWeightValidator userWeightValidator : userWeightValidators){
+            if(!userWeightValidator.isValid(weight)){
+                throw new Exception();
+            }
+        }
         this.weight = weight;
     }
 

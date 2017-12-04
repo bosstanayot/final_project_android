@@ -40,7 +40,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
                 intent.putExtra("type", 1);
                 intent.putExtra("duration", listItem.getDuration());
                 intent.putExtra("count_step", Integer.parseInt(listItem.getCount_step()));//int
-                intent.putExtra("distance", Float.parseFloat(listItem.getDistance()));//float
+                intent.putExtra("distance", Double.parseDouble(listItem.getDistance()));//float
                 intent.putExtra("time", listItem.getTime());//String
                 intent.putExtra("sec", Integer.parseInt(listItem.getSec()));
                 intent.putExtra("cal", Integer.parseInt(listItem.getCalories()));

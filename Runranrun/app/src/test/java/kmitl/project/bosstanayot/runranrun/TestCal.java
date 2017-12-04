@@ -8,11 +8,6 @@ import kmitl.project.bosstanayot.runranrun.Model.ProfileInfo;
 
 import static org.junit.Assert.*;
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
 public class TestCal {
     @Test
     public void caltest() throws Exception {

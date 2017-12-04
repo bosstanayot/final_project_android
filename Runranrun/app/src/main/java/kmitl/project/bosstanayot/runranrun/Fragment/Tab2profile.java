@@ -61,7 +61,7 @@ public class Tab2profile extends Fragment {
         number = rootView.findViewById(R.id.number);
         genderText.setButtonColor(getResources().getColor(R.color.colorPrimary));
         number.setButtonColor(getResources().getColor(R.color.colorPrimary));
-        history.setButtonColor(getResources().getColor(R.color.colorPrimary));
+        history.setButtonColor(getResources().getColor(R.color.fbutton_color_sun_flower));
         logoutbtn.setButtonColor(getResources().getColor(R.color.com_facebook_blue));
         history.setOnClickListener(new View.OnClickListener() {
             @Override

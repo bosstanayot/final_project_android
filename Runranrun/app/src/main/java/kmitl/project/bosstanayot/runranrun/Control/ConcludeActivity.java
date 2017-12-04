@@ -18,7 +18,7 @@ import kmitl.project.bosstanayot.runranrun.R;
 public class ConcludeActivity extends AppCompatActivity {
     TextView allsteps, alldistance, alltime, totalTimeText, timetext, cal_text, speedText;
     int count_step, hour, min, sec, second, num_weight, type;
-    float distance;
+    double distance;
     String duration,currentDateTime,total_time, uid;
     double calorie;
     private Firebase hisFirebase;
@@ -46,7 +46,7 @@ public class ConcludeActivity extends AppCompatActivity {
             second = bundle.getInt("sec");
             totalTimeText.setText(toTextTime(second-1));
             count_step = bundle.getInt("count_step");
-            distance = bundle.getFloat("distance");
+            distance = bundle.getDouble("distance");
             duration = bundle.getString("duration");
         }
         getDateTime();
@@ -78,7 +78,6 @@ public class ConcludeActivity extends AppCompatActivity {
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_share, menu);
         return true;
     }
@@ -87,7 +86,6 @@ public class ConcludeActivity extends AppCompatActivity {
         if(num_weight == 0){
             num_weight = 55;
         }
-        Toast.makeText(this, String.valueOf(num_weight),Toast.LENGTH_SHORT ).show();
         calorie = setCal((double)num_weight, (double)distance);
         cal_text.setText(String.valueOf((int)calorie));
         sendHistory();
